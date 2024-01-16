@@ -1,10 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {
+  signInStart,
+  signInFailure,
+  signInSuccess,
+} from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -13,8 +19,7 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
-      //setError(true);
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -24,16 +29,16 @@ export default function SignIn() {
       });
       const data = await res.json();
       //console.log(data);
-      setLoading(false);
+
       if (data.success === false) {
-        setError(true);
+        dispatch(signInFailure(data));
         return;
       }
+      dispatch(signInSuccess(data));
       navigate("/");
       //setError(false);
     } catch (error) {
-      setLoading(false);
-      setError(true);
+      dispatch(signInFailure(error));
     }
   };
 
@@ -79,7 +84,9 @@ parses the response JSON, and logs the data to the console.   */
           <span className="text-blue-500">Sign up</span>
         </Link>
       </div>
-      <p className="mt-5 text-red-700">{error && "Something went wrong!"}</p>
+      <p className="mt-5 text-red-700">
+        {error ? error.message || "Something went wrong!" : ""}
+      </p>
     </div>
   );
 }

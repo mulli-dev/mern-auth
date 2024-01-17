@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import OAuth from "../components/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -79,6 +80,7 @@ parses the response JSON, and logs the data to the console.   */
           {""}
           {loading ? "Loading..." : "Sign Up"}
         </button>
+        <OAuth />
       </form>
 
       <div className="flex gap-2 mt-5">

@@ -5,6 +5,7 @@ import { signInSuccess } from "../redux/user/userSlice";
 
 export default function OAuth() {
   const dispatch = useDispatch();
+
   const handleGoogleClick = async () => {
     try {
       // Your Google authentication logic should go here
@@ -15,7 +16,7 @@ export default function OAuth() {
 
       // Perform the authentication with the provider
 
-      const res = await fetch("api/auth/google", {
+      const res = await fetch("/api/auth/google", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,10 +28,11 @@ export default function OAuth() {
         }),
       });
       const data = await res.json();
+      console.log(data);
       dispatch(signInSuccess(data));
 
       // Log the result or perform additional actions as needed
-      console.log(result);
+      console.log(data);
     } catch (error) {
       console.error("Could not login with Google", error);
     }

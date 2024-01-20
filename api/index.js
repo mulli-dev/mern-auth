@@ -7,10 +7,24 @@ import cookieParser from "cookie-parser";
 import path from "path";
 dotenv.config();
 
-mongoose.connect(process.env.MONGO).then(() => {
-  console.log("MongoDB Connected");
-});
+mongoose
+  .connect(process.env.MONGO)
+  .then(() => {
+    console.log("MongoDB Connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+const _dirname = path.resolve();
+
 const app = express();
+
+app.use(express.static(path.join(__dirnamedirname, "/client/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname), "client", "dist", "index.html");
+});
 
 app.use(express.json());
 // you're telling your Express app to apply this middleware to all incoming requests, so that if the request has a JSON body, it will be parsed into a JavaScript object that you can work with in your route handlers.

@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 
 export default function Home() {
   return (
@@ -6,7 +6,7 @@ export default function Home() {
       <h1 className="mb-4 text-3xl font-bold text-slate-800">
         Welcome to my Auth App!
       </h1>
-      <p className="mb-4  text-slate-700">
+      <p className="mb-4 text-slate-700">
         {" "}
         This is a full-stack web application built with the MERN (MongoDB,
         Express, React, Node.js) stack. It includes authentication features that

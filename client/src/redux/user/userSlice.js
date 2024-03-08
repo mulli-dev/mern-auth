@@ -71,5 +71,5 @@ export const {
 } = userSlice.actions;
 //export them to be used as aglobal state all actions but they are inside user slice
 
-export default userSlice.reducer;
+export default userSlice.reducer; //its name is user reducer
 // export reducer which is inside userSlice and reducer to the store now its name is userReducer

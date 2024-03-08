@@ -12,6 +12,7 @@ export default function SignUp() {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  //sending data to the database
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

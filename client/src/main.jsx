@@ -14,4 +14,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </Provider>
 );
 
-//main.jsx is the route our application
+//main.jsx is the root our application
